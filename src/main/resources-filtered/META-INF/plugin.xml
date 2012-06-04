@@ -1,0 +1,20 @@
+<!DOCTYPE idea-plugin PUBLIC "Plugin/DTD" "http://plugins.intellij.net/plugin.dtd">
+<idea-plugin>
+    <id>${project.artifactId}</id>
+    <name>${project.name}</name>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor>AGI</vendor>
+    <idea-version since-build="9164"/>
+
+    <application-components>
+        <component>
+            <implementation-class>net.codjo.test.runner.release.ReleaseTestRunConfigurationType</implementation-class>
+        </component>
+    </application-components>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <configurationType implementation="net.codjo.test.runner.release.ReleaseTestRunConfigurationType"/>
+    </extensions>
+
+</idea-plugin>

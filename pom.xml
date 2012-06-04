@@ -1,0 +1,166 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+     | POM Relationships
+     -->
+
+    <parent>
+        <groupId>net.codjo.pom</groupId>
+        <artifactId>codjo-pom</artifactId>
+        <version>SNAPSHOT</version>
+    </parent>
+    <groupId>net.codjo.tools</groupId>
+    <artifactId>codjo-tools-test-runner</artifactId>
+    <version>7.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>idea</artifactId>
+            <scope>system</scope>
+            <systemPath>C:/INTELLIJ/IntelliJ-IU-10.0.3/lib/idea.jar</systemPath>
+            <version>10.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>idea-openapi</artifactId>
+            <scope>system</scope>
+            <systemPath>C:/INTELLIJ/IntelliJ-IU-10.0.3/lib/openapi.jar</systemPath>
+            <version>10.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>idea-extensions</artifactId>
+            <scope>system</scope>
+            <systemPath>C:/INTELLIJ/IntelliJ-IU-10.0.3/lib/extensions.jar</systemPath>
+            <version>10.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>idea-jdom</artifactId>
+            <scope>system</scope>
+            <systemPath>C:/INTELLIJ/IntelliJ-IU-10.0.3/lib/jdom.jar</systemPath>
+            <version>10.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>idea-trove4j</artifactId>
+            <scope>system</scope>
+            <systemPath>C:/INTELLIJ/IntelliJ-IU-10.0.3/lib/trove4j.jar</systemPath>
+            <version>10.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>idea-annotations</artifactId>
+            <scope>system</scope>
+            <systemPath>C:/INTELLIJ/IntelliJ-IU-10.0.3/lib/annotations.jar</systemPath>
+            <version>10.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>idea-util</artifactId>
+            <scope>system</scope>
+            <systemPath>C:/INTELLIJ/IntelliJ-IU-10.0.3/lib/util.jar</systemPath>
+            <version>10.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>idea-icons</artifactId>
+            <scope>system</scope>
+            <systemPath>C:/INTELLIJ/IntelliJ-IU-10.0.3/lib/icons.jar</systemPath>
+            <version>10.5.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.codjo.test</groupId>
+            <artifactId>codjo-test-common</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!--
+    | Project Information
+    -->
+
+    <name>IntelliJ &gt; Plugin &gt; Tests Runner</name>
+    <description>Plugin IntelliJ pour lancer des tests release</description>
+    <inceptionYear>2003</inceptionYear>
+
+    <build>
+        <!--Ajouté pour que le plugin idea et le build maven marchent tous les deux -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources-filtered</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>ideauidesigner-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-idea-plugin</artifactId>
+                <version>2.1</version>
+                <!-- generating a plugin only works since 2.1-SNAPSHOT -->
+                <configuration>
+                    <ideaPlugin>true</ideaPlugin>
+                    <jdkName>IDEA IU-107.322</jdkName>
+                    <dependenciesAsLibraries>true</dependenciesAsLibraries>
+                    <libraries>
+                        <library>
+                            <name>idea-annotations</name>
+                            <exclude>true</exclude>
+                        </library>
+                        <library>
+                            <name>idea-jdom</name>
+                            <exclude>true</exclude>
+                        </library>
+                        <library>
+                            <name>idea</name>
+                            <exclude>true</exclude>
+                        </library>
+                        <library>
+                            <name>idea-trove4j</name>
+                            <exclude>true</exclude>
+                        </library>
+                        <library>
+                            <name>idea-util</name>
+                            <exclude>true</exclude>
+                        </library>
+                        <library>
+                            <name>idea-extensions</name>
+                            <exclude>true</exclude>
+                        </library>
+                        <library>
+                            <name>idea-openapi</name>
+                            <exclude>true</exclude>
+                        </library>
+                    </libraries>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <!--
+    | Environment Information
+    -->
+
+    <scm>
+        <connection>scm:git:https://github.com/codjo/codjo-tools-test-runner.git</connection>
+        <developerConnection>scm:git:https://github.com/codjo/codjo-tools-test-runner.git</developerConnection>
+        <url>https://github.com/codjo/codjo-tools-test-runner</url>
+    </scm>
+
+</project>

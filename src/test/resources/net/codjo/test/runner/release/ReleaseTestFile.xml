@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ |  Sample de test release.
+ -->
+<release-test name="IHM_DUPLICATE_EXPENSES_BRANCH" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="test-release.xsd">
+
+    <tokio-load id="load" file="IHM_DUPLICATE_EXPENSES_BRANCH.tokio"/>
+    <tokio-set-db id="setdb" refId="load" scenario="IHM_duplicate"/>
+
+    <client user="pims" result="Duplication et calcul OK">
+        <![CDATA[
+         <command request_id="1816">
+        	<id>expensesBranchDuplicatorHandler</id>
+        	<args>
+        		<field name="src_branch" value="05_C_19000101"/>
+        		<field name="dest_branch" value="05_D_19000101"/>
+        	</args>
+         </command>
+        ]]>
+    </client>
+
+
+    <listen-jms timeout="8000">
+        <request step="treatment" user="pims" argument="ComputeSyntheticRate">
+            <audit type="PRE" error="NONE"/>
+            <audit type="POST" error="NONE"/>
+        </request>
+    </listen-jms>
+
+    <tokio-assert refId="setdb" table="AP_MANAG_EXPENSES_ISIN"/>
+    <tokio-assert refId="setdb" table="AP_MANAG_EXPENSES_RATE"/>
+    <tokio-assert refId="setdb" table="AP_MANAG_EXPENSES_INFO"/>
+
+</release-test>
